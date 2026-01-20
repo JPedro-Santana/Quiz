@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav{
+    background-color: #2D69B1;
+
+}
+
+.nav-left{
+
+}
+
+.nav-right{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+h1{
+    color: #1F4077;
+}
+
+.main-p{
+    color: #2E3B4E;
+}
+
+.btn-main{
+    background-color: #1E62BB;
+}
+
+.btn-create{
+    background-color: #2B9C51;
+}
