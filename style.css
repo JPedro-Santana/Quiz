@@ -1,37 +1,190 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@font-face {
+  font-family: "Vegur";
+  src: url(/assets/fonts/Vegur-Regular.otf);
+  font-weight: normal;
+  font-style: normal;
 }
 
-nav{
-    background-color: #2D69B1;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Vegur", Helvetica, sans-serif;
 }
 
-.nav-left{
-
+/* ---------- NAV ---------- */
+nav {
+  background: linear-gradient(180deg, #3676c4, #1f4f8f);
+  padding-right: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
 }
 
-.nav-right{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    
+.logo {
+  margin-left: 80px;
 }
 
-h1{
-    color: #1F4077;
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin-right: 90px;
 }
 
-.main-p{
-    color: #2E3B4E;
+nav ul li a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding-bottom: 4px;
 }
 
-.btn-main{
-    background-color: #1E62BB;
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #fad549;
+  transition: width 0.4s ease;
 }
 
-.btn-create{
-    background-color: #2B9C51;
+/* hover animation */
+nav ul li a:hover::after {
+  color: white;
+  width: 100%;
+}
+
+/* ---------- HERO / MAIN ---------- */
+main {
+  background-color: #f5f7fc;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+main h1 {
+  color: #1f4077;
+  font-size: 46px;
+  margin-bottom: 15px;
+  padding-top: 40px;
+}
+
+.main-p {
+  color: #4a5d73;
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+/* Main Buttons */
+.btn-main,
+.btn-create {
+  font-size: 20px;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  margin: 0 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-main {
+  background:linear-gradient(180deg, #1e62bb, #0a438d);
+}
+
+.btn-main:hover {
+  background: hsl(214, 72%, 28%);
+}
+
+.btn-create {
+  background: linear-gradient(180deg, #2b9c51, #127533) ;
+}
+
+.btn-create:hover {
+  background: hsl(140, 58%, 24%);
+}
+
+/* ---------- POPULAR QUIZZES ---------- */
+section {
+  padding: 60px;
+  background-color: #ffffff;
+}
+
+section h2 {
+  font-size: 26px;
+  color: #1f4077;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+/* CARDS GRID */
+section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* TITLE */
+section h2 {
+  grid-column: span 3;
+}
+
+/* CARD */
+.quiz-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-5px);
+}
+
+.quiz-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.quiz-card .title {
+  font-size: 18px;
+  color: #1f4077;
+  margin: 15px;
+}
+
+.question-number {
+  color: #5b6f86;
+  margin: 0 15px 15px;
+}
+
+/* CARD BUTTON */
+.btn-resolve {
+  width: calc(100% - 30px);
+  margin: 0 15px 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: #1e62bb;
+}
+
+.btn-resolve:hover {
+  opacity: 0.9;
+}
+
+/* BUTTON COLOR VARIATION */
+.quiz-card:nth-child(2) .btn-resolve {
+  background-color: #6a5acd;
+}
+
+.quiz-card:nth-child(3) .btn-resolve {
+  background-color: #f28c28;
 }

@@ -3,47 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz e Trivias</title>
+    <title>QuizHub</title>
+    <link rel="shortcut icon" href="/assets/favicon/QuizHub.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
-        <div class="nav-l">
-            <img src="assets/QuizHub Logo Light.png" alt="Logo" class="logo">
-        </div>
-        <div class="nav-r">
+    <a href="index.html"><img src="assets/QuizHub Logo Light.png" alt="Logo" class="logo"></a>
             <ul>
-                <li><a href="">Explorar Quizzes</a></li>
-                <span>|</span>
-                <li><a href="">Criar Quiz</a></li>
+                <li><a href="explore_quiz.html">Explore Quizzes</a></li>
+                <li><a href="create_quiz.html">Create Quiz</a></li>
             </ul>
-        </div>
     </nav>
     <main>
-        <h1>Crie, compartilhe e resolva quizzes!</h1>
-        <p class="main-p">Construa e jogue quizzes sobre qualquer assunto</p>
-        <button class="btn-main">Explorar Quizzes ></button>
-        <button class="btn-create">Criar Quiz ></button>
+        <h1>Create, share and solve quizzes!</h1>
+        <p class="main-p">Create and play quizzes on any subject.</p>
+        <a href="explore_quiz.html"><button class="btn-main">Explore Quizzes</button></a>
+        <a href="create_quiz.html"><button class="btn-create">Create Quiz</button></a>
     </main>
     <section>
-        <h2>Quizzes Populares</h2>
+        <h2>Popular Quizzes</h2>
         <div class="quiz-card">
-            <img src="/assets/bandeira do brasil.jpg" alt="Bandeira Brasil">
+            <img src="/assets/quiz_img/bandeira do brasil.jpg" alt="Bandeira Brasil">
             <h3 class="title">História do Brasil</h3>
             <p class="question-number">10 perguntas</p>
-            <button class="btn-resolve">Resolver Quiz ></button>
+            <button class="btn-resolve">Resolver Quiz</button>
         </div>
         <div class="quiz-card">
-            <img src="/assets/progamacao.jpg" alt="">
+            <img src="/assets/quiz_img/progamacao.jpg" alt="">
             <h3 class="title">Trivia de Programação</h3>
             <p class="question-number">12 perguntas</p>
             <button class="btn-resolve">Resolver Quiz</button>
         </div>
         <div class="quiz-card">
-            <img src="/assets/Cinema.jpg" alt="">
+            <img src="/assets/quiz_img/Cinema.jpg" alt="">
             <h3 class="title">Curiosidades de Cinema</h3>
             <p class="question-number">8 perguntas</p>
-            <button class="btn-resolve">Resolver Quiz ></button>
+            <button class="btn-resolve">Resolver Quiz</button>
         </div>
     </section>
 </body>
