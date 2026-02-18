@@ -1,27 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Quiz</title>
-    <link rel="shortcut icon" href="/assets/favicon/QuizHub.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav>
-    <a href="/templates/index.html"><img src="assets/QuizHub Logo Light.png" alt="Logo" class="logo"></a>
-            <ul>
-                <li><a href="/templates/explore.html">Explore Quizzes</a></li>
-                <li><a href="/templates/create.html">Create Quiz</a></li>
-            </ul>
-    </nav>
+    {% extends "layout.html" %}
+
+    {% block content %}
     <main>
-    <form action="">
+    <form method="POST" action="{{url_for('create')}}">
          <div class="form-group">
         <label for="title">Título do Quiz</label>
-        <input type="text" id="title" placeholder="Ex: Quiz de História Geral" />
+        <input type="text" id="title" name="title" placeholder="Ex: Quiz de História Geral" />
       </div>
-
       <div class="form-group">
         <label for="category">Categoria</label>
         <select id="category">
@@ -31,7 +16,6 @@
           <option>Entretenimento</option>
         </select>
       </div>
-
       <div class="form-group">
         <label for="description">Descrição</label>
         <textarea id="description" rows="3"></textarea>
@@ -53,9 +37,8 @@
           <input type="text" placeholder="Digite a pergunta..." />
         </div>
 
-      <button type="button" class="btn btn-secondary">+ Adicionar Pergunta</button>
+      <button type="button" class="btn btn-secondary">Adicionar Pergunta</button>
       <br /><br />
       <button type="submit" class="btn btn-primary">Salvar Quiz</button>
     </form>
-</body>
-</html>
+    {% endblock %}
