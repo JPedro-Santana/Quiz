@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
-#db = SQL()
+db = SQL("sqlite:///quiz.db")
 
 
 @app.route("/")
