@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='QuizHub.ico')}}" type="image/x-icon">
+</head>
+<body>
+     <nav>
+    <a href="/"><img src="{{url_for('static', filename='images/QuizHub Logo Light.png')}}" alt="Logo" class="logo"></a>
+            <ul>
+                <li><a href="{{url_for('explore')}}">Explore Quizzes</a></li>
+                <li><a href="{{url_for('create')}}">Create Quiz</a></li>
+            </ul>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <h2><a href="https://github.com/JPedro-Santana" target="_blank">Made By <br>João Pedro Santana &copy; 2026</a></h2>
+        <a href="https://github.com/JPedro-Santana/Quiz" target="_blank"><img src="/static/images/github.svg" alt=""></a>
+    </footer>
+</body>
+</html>

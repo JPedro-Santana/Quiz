@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore Quizzes</title>
-    <link rel="shortcut icon" href="/assets/favicon/QuizHub.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-     <nav>
-    <a href="/templates/index.html"><img src="assets/QuizHub Logo Light.png" alt="Logo" class="logo"></a>
-            <ul>
-                <li><a href="/templates/explore.html">Explore Quizzes</a></li>
-                <li><a href="/templates/create.html">Create Quiz</a></li>
-            </ul>
-    </nav>
+    {% extends "layout.html" %}
     <main>
+        {% block content %}
         <h1 class="title">Explore Quizzes</h1>
         <input type="search" placeholder="Search Quizzes">
         <select name="category" id="category">
@@ -27,6 +12,7 @@
         <div class="quiz-grid">
             
         </div>
+        {% endblock %}
     </main>
-</body>
-</html>
+    
+   
