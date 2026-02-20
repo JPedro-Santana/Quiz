@@ -92,7 +92,7 @@ main h1 {
 }
 
 .btn-main {
-  background:linear-gradient(180deg, #1e62bb, #0a438d);
+  background: linear-gradient(180deg, #1e62bb, #0a438d);
 }
 
 .btn-main:hover {
@@ -100,7 +100,7 @@ main h1 {
 }
 
 .btn-create {
-  background: linear-gradient(180deg, #2b9c51, #127533) ;
+  background: linear-gradient(180deg, #2b9c51, #127533);
 }
 
 .btn-create:hover {
@@ -187,4 +187,36 @@ section h2 {
 
 .quiz-card:nth-child(3) .btn-resolve {
   background-color: #f28c28;
+}
+
+footer {
+  background: linear-gradient(180deg, #3676c4, #1f4f8f);
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+.github-logo {
+  width: 70px;
+  height: 70px;
+  padding: 20px 0 12px 30px;
+}
+
+.github-logo:hover {
+  transition: transform 0.2s ease;
+  transform: translateY(-5px);
+}
+
+.name-logo a {
+  color: white;
+  font-weight: 200;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.name-logo:hover {
+  transition: transform 0.2s ease;
+  transform: translateY(-5px);
 }
