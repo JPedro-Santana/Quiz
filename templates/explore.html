@@ -1,21 +1,29 @@
     {% extends "layout.html" %}
 
- 
-        
         {% block content %}
-        <main>
-            <h1 class="title">Explore Quizzes</h1>
-            <input type="search" placeholder="Search Quizzes">
-            <select name="category" id="category">
-                <option value="history">History</option>
-            </select>
-            <select name="filters" id="filters">
-                <option value="recents">More Recents</option>
-            </select>
-            <div class="quiz-grid">
-                
-            </div>
-        </main>
+       <main>
+    <h1 class="page-title">Explore Quizzes</h1>
+
+    <div class="explore-controls">
+        <input type="search" placeholder="Search quizzes...">
+
+        <select name="category">
+            <option value="" selected>All Categories</option>
+            <option value="history">History</option>
+            <option value="programming">Programming</option>
+            <option value="science">Science</option>
+        </select>
+
+        <select name="filters">
+            <option value="recent">Most Recent</option>
+            <option value="popular">Most Popular</option>
+        </select>
+    </div>
+
+    <div class="quiz-grid">
+
+    </div>
+</main>
         {% endblock %}
   
     
