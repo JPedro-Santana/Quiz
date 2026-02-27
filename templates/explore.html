@@ -8,9 +8,9 @@
 
     <select name="category">
       <option value="" selected>All Categories</option>
-      <option value="history">History</option>
-      <option value="programming">Programming</option>
-      <option value="science">Science</option>
+      {% for category in categories %}
+          <option value="{{category}}">{{category}}</option>
+      {% endfor %}
     </select>
 
     <select name="filters">
@@ -19,9 +19,20 @@
     </select>
   </div>
 
-  <div class="quiz-grid">
-    {% for quiz in quizzes %} 
-    <div>{{quiz.title}}</div>
+  <div class="quiz-list">
+  {% for quiz in quizzes %} 
+    <div class="quiz-container">
+      <div class="quiz-image">
+        <img src="{{quiz.image}}" alt="Quiz Image">
+      </div>
+      <div class="quiz-info">
+        <h2>{{quiz.title}}</h2>
+        <p>{{quiz.description}}</p>
+      </div>
+      <div class="quiz-action">
+        <a href="{{url_for('quiz_layout', id=quiz.id)}}"><button class="btn btn-solve">Solve Quiz</button></a>
+      </div>
+    </div>
     {% endfor %}
   </div>
 </main>

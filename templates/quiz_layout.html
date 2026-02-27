@@ -1,12 +1,13 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<main>
-    <div class="head">
+<main class="quiz-layout-container">
+    <div class="quiz-header">
         <h1>{{quiz.title}}</h1>
         <p>{{quiz.description}}</p>
         <button>{{quiz.category}}</button>
     </div>
+
     <div class="result"></div>
 
 </main>

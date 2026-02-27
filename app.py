@@ -6,9 +6,12 @@ app = Flask(__name__)
 db = SQL("sqlite:///quiz.db")
 
 CATEGORIES = [
-    "Science",
-    "Programming",
+    "About Me",
+    "Entertainment",
     "History",
+    "Science",
+    "Sports",
+    "Tecnology",
 ]
 
 @app.route("/")
