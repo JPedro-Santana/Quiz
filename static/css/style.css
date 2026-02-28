@@ -394,7 +394,7 @@ h2 {
   cursor: pointer;
 }
 
-/* Primary button */
+/* Save Quiz button */
 .btn-save {
   background: linear-gradient(180deg, #2b9c51, #127533);
   color: white;
@@ -404,4 +404,13 @@ h2 {
 
 .btn-save:hover {
   background: hsl(140, 58%, 24%);
+}
+
+/* Flash Error Message */
+.msg{
+  color: red;
+  font-size: 16px;
+  padding-left: 8px;
+  padding-top: 12px;
+
 }

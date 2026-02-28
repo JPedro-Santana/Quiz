@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %} Not Found {% endblock %}
+
+{% block content %}
+<h2>Ops!
+    <br>
+    Quiz not Found
+</h2>
+<p>Click on the button down bellow to</p>
+<a href="{{url_for('explore')}}"><button class="btn-main">Explore Quizzes</button></a>  
+{% endblock %}

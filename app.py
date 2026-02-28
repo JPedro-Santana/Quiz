@@ -1,7 +1,8 @@
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for, flash
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = "my-secret-key"
 
 db = SQL("sqlite:///quiz.db")
 
@@ -26,7 +27,8 @@ def create():
         description = request.form.get("description")
         
         if not title or not category:
-            return "Title and Category are required."
+            flash("Title and Category are required.")
+            return redirect ("/create")
         db.execute("INSERT INTO quiz (title, category, description) VALUES(?, ?, ?)", title, category, description)
         
         quiz_id = db.execute("SELECT last_insert_rowid() as id")[0]["id"]
@@ -72,7 +74,7 @@ def quiz_layout(id):
     quiz = db.execute("SELECT * FROM quiz WHERE id = ?", id) 
     
     if len(quiz) == 0:
-        return "Quiz not Found"
+        return render_template("not_found.html")
     
     return render_template("quiz_layout.html", quiz=quiz[0])
 
