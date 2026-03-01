@@ -29,7 +29,7 @@
         <img src="{{quiz.image}}" alt="Quiz Image">
       </div>
       <div class="quiz-info">
-        <h2>{{quiz.title}}</h2>
+        <h2><a href="{{url_for('quiz_layout', id=quiz.id)}}">{{quiz.title}}</a></h2>
         <p>{{quiz.description}}</p>
       </div>
       <div class="quiz-action">

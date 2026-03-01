@@ -78,5 +78,7 @@ def quiz_layout(id):
     
     return render_template("quiz_layout.html", quiz=quiz[0])
 
+
+
 if __name__ == "__main__":
     app.run(debug=True)
