@@ -239,8 +239,10 @@ footer {
 /* Controls area */
 .explore-controls {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   gap: 20px;
+  padding: 15px 30px;
   margin-bottom: 50px;
   flex-wrap: wrap;
 }
@@ -458,4 +460,14 @@ h2 {
 
 .btn-cancel:hover{
   background-color: #6d6c6c;
+}
+
+.btn-search{
+  color: white;
+  padding: 10px 25px;
+  background: linear-gradient(180deg, #1e62bb, #0a438d);
+}
+
+.btn-search:hover{
+  opacity: 0.9;
 }

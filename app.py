@@ -50,9 +50,9 @@ def create():
 
 @app.route("/explore", methods=["GET"])
 def explore():
-    category = request.args.get("category")
-    order = request.args.get("order")
-    search = request.args.get("q")
+    category = request.args.get("category", "all")
+    order = request.args.get("order", "recent")
+    search = request.args.get("q", "")
     
     query = "SELECT * FROM quiz WHERE 1=1"
     params= []

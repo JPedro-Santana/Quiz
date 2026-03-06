@@ -6,21 +6,23 @@
 <main>
   <h1 class="page-title">Explore Quizzes</h1>
 
-  <div class="explore-controls">
-    <input type="search" placeholder="Search quizzes..." />
+  <form method="GET" action="{{url_for('explore')}}" class="explore-controls">
+    <input type="search" name="q" value="{{search_query}}" placeholder="Search quizzes..." />
 
-    <select name="category">
+    <select name="category" onchange="this.form.submit()">
       <option value="" selected>All Categories</option>
       {% for category in categories %}
-          <option value="{{category}}">{{category}}</option>
+          <option value="{{category}}" {% if category == selected_category %}selected{% endif %}>{{category}}</option>
       {% endfor %}
     </select>
 
-    <select name="filters">
-      <option value="recent">Most Recent</option>
-      <option value="popular">Most Popular</option>
+    <select name="order" onchange="this.form.submit()">
+      <option value="recent"{% if category == recent %}selected{% endif %}>Most Recent</option>
+      <option value="old" {% if selected_order == old %}selected{% endif %}>Oldest</option>
+      <!--<option value="popular">Most Popular</option>-->
     </select>
-  </div>
+    <button class="btn btn-search">Search</button>
+  </form>
 
   <div class="quiz-list">
   {% for quiz in quizzes %} 
