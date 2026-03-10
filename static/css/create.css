@@ -1,0 +1,131 @@
+/* ---------- CREATE ---------- */
+form {
+  max-width: 700px;
+  margin: 20px auto 0;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
+  font-size: 16px;
+  color: #1f4077;
+  margin-bottom: 8px;
+}
+
+/* Inputs */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #d0d7e2;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+/* Focus */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #1e62bb;
+  box-shadow: 0 0 0 3px rgba(30, 98, 187, 0.1);
+}
+
+/* Question Block */
+.question-block {
+  background-color: #f5f7fc;
+  padding: 25px;
+  border-radius: 6px;
+  margin-top: 30px;
+  border: 1px solid #e0e6ef;
+}
+
+/* Section title */
+h2 {
+  color: #1f4077;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+/* Questions container */
+#questions-container {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.question-item {
+  background-color: #f5f7fc;
+  border-radius: 6px;
+  border: 1px solid #e0e6ef;
+  padding: 16px 18px;
+}
+
+.question-item h3 {
+  font-size: 18px;
+  color: #1f4077;
+  margin-bottom: 10px;
+}
+
+.question-item h3 span {
+  font-weight: 500;
+  font-size: 14px;
+  color: #6c7a93;
+}
+
+/* Multiple choice options*/
+.question-item .options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+  margin-top: 8px;
+}
+
+.question-item .options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.question-item .options input[type="text"], .input {
+  flex: 1;
+  padding: 10px 16px;
+  height: 44px;
+  border-radius: 4px;
+  border: 1px solid #d0d7e2;
+  font-size: 16px;
+}
+
+/* True/False spacing */
+.question-item > label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 32px;
+  margin-top: 8px;
+}
+
+/* Save Quiz button */
+.btn-save {
+  background: linear-gradient(180deg, #2b9c51, #127533);
+  color: white;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.btn-save:hover {
+  background: hsl(140, 58%, 24%);
+}

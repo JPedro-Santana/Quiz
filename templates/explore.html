@@ -1,4 +1,6 @@
-{% extends "layout.html" %} 
+{% extends "layout.html" %}
+
+{%block css_style %} <link rel="stylesheet" href="{{ url_for('static', filename='css/explore.css') }}"> {% endblock %}
 
 {% block title %} Explore Quizzes {% endblock %}
 

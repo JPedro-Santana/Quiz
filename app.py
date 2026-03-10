@@ -16,12 +16,12 @@ CATEGORIES = [
 ]
 
 DEFAULT_IMAGES = {
-     "About Me": "/static/images/categories/aboutme.jpg",
-    "Entertainment": "/static/images/entertainment.jpg" ,
+    "About Me": "/static/images/categories/aboutme.jpg",
+    "Entertainment": "/static/images/categories/entertainment.jpg" ,
     "History": "/static/images/categories/history.jpg",
     "Science": "/static/images/categories/science.jpg",
     "Sports": "/static/images/categories/sports.jpg" ,
-    "Tecnology": "/static/images/tecnology.jpg" ,
+    "Tecnology": "/static/images/categories/tecnology.jpg"
 }
 
 @app.route("/")

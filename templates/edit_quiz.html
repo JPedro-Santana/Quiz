@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{%block css_style %} <link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}"> {% endblock %}
+
 {% block title %} Edit Quiz {% endblock %}
 
 {% block content %}
@@ -28,7 +30,7 @@ selected
 <label>Description</label>
 <textarea name="description">{{quiz.description}}</textarea>
 </div>
-<button class="btn btn-primary">Update Quiz</button>
+<button class="btn btn-save">Update Quiz</button>
 </form>
 </main>
 {% endblock %}
