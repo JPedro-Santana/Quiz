@@ -20,36 +20,40 @@ function addQuestion() {
   questionDiv.classList.add("question-item");
 
   if (type === "multiple") {
+    const groupName = `answer-${Date.now()}`;
     questionDiv.innerHTML = `
-      <h3>${questionText}</h3>
+    <ion-icon name="trash-outline" aria-label="Remove"></ion-icon>
+    <h3>${questionText}</h3>
       <p>Select the correct answer:</p>
       <div class="options">
         <label>
-          <input type="radio" name="answer-${Date.now()}" value="1">
+          <input type="radio" name="${groupName}" value="1">
           <input type="text" placeholder="Option 1" required>
         </label>
         <label>
-          <input type="radio" name="answer-${Date.now()}" value="2">
+          <input type="radio" name="${groupName}" value="2">
           <input type="text" placeholder="Option 2" required>
         </label>
         <label>
-          <input type="radio" name="answer-${Date.now()}" value="3">
+          <input type="radio" name="${groupName}" value="3">
           <input type="text" placeholder="Option 3">
         </label>
         <label>
-          <input type="radio" name="answer-${Date.now()}" value="4">
+          <input type="radio" name="${groupName}" value="4">
           <input type="text" placeholder="Option 4">
         </label>
       </div>
     `;
   } else if (type === "text") {
     questionDiv.innerHTML = `
-      <h3>${questionText}</h3>
-      <input type="text"  class="input" placeholder="Correct answer.." required>
+    <ion-icon name="trash-outline" aria-label="Remove"></ion-icon>
+    <h3>${questionText}</h3>
+    <input type="text"  class="input" placeholder="Correct answer.." required>
     `; 
   } else if (type === "boolean") {
     const groupName = `answer-${Date.now()}`;
     questionDiv.innerHTML = `
+      <ion-icon name="trash-outline" aria-label="Remove"></ion-icon>
       <h3>${questionText}</h3>
       <label>
         <input type="radio" name="${groupName}" value="true">
@@ -74,8 +78,44 @@ function addQuestion() {
   }
 
   questionInput.value = "";
+
+  updateBackButtonVisibility();
 }
 
+/* Remove question when clicking on trash icon */
+if (questionsContainer) {
+  questionsContainer.addEventListener("click", (event) => {
+    const trashIcon = event.target.closest('ion-icon[name="trash-outline"]');
+    if (!trashIcon) return;
+
+    const questionDiv = trashIcon.closest(".question-item");
+    if (questionDiv && questionsContainer.contains(questionDiv)) {
+      questionDiv.remove();
+    }
+  });
+}
+
+/* Go back to the question input section when clicking in the arrow icon */
+const backToQuestion = document.createElement("button")
+backToQuestion.innerHTML=`<ion-icon name="arrow-up-circle-outline"></ion-icon>`
+
+backToQuestion.addEventListener("click", () =>{
+  questionTypeSelect.scrollIntoView();
+  questionInput.focus();
+});
+
+function updateBackButtonVisibility() {
+  const questionCount = questionsContainer.querySelectorAll(".question-item").length;
+  if (questionCount >= 2) {
+    if (!document.querySelector('main').contains(backToQuestion)) {
+      document.querySelector('main').appendChild(backToQuestion);
+    }
+  } else {
+    if (document.body.contains(backToQuestion)) {
+      backToQuestion.remove();
+    }
+  }
+}
 
 const messages = [
   "Keep practicing! You'll do better next time! 📚",

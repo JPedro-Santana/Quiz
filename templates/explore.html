@@ -9,7 +9,9 @@
   <h1 class="page-title">Explore Quizzes</h1>
 
   <form method="GET" action="{{url_for('explore')}}" class="explore-controls">
-    <input type="search" name="q" value="{{search_query}}" placeholder="Search quizzes..." />
+    <ion-icon name="search-outline">
+      <input type="search" name="q" value="{{search_query}}" placeholder="Search quizzes..." />
+    </ion-icon>
 
     <select name="category" onchange="this.form.submit()">
       <option value="" selected>All Categories</option>

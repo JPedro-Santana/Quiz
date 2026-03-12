@@ -59,6 +59,37 @@ h2 {
   margin-bottom: 20px;
 }
 
+.question-item {
+  position: relative;
+}
+
+/* Remove Button*/
+.question-item ion-icon[name="trash-outline"] {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 18px;
+  color: red;
+  cursor: pointer;
+}
+
+/* Back to Question Input Button*/
+ion-icon[name="arrow-up-circle-outline"] {
+  position: fixed;
+  left: 100px;
+  bottom: 120px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #1e62bb;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  font-size: 24px; 
+}
+
 /* Questions container */
 #questions-container {
   margin-top: 25px;
