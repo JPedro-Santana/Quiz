@@ -1,4 +1,3 @@
-/* ---------- CREATE PAGE ---------- */
 const addQuestionBtn = document.getElementById("btn-add");
 const questionTypeSelect = document.querySelector(".question-type");
 const questionInput = document.getElementById("question-text");
@@ -35,7 +34,7 @@ function createQuestionElement(type, text, data = {}) {
     const options = data.options && data.options.length ? data.options : ["", "", "", ""];
     const correctIndex = data.correct_index !== undefined ? data.correct_index : -1;
 
-    let optionsHtml = '<p class="options-hint">Click an option to mark it as correct <span>(green border = correct answer)</span></p><div class="option-inputs">';
+    let optionsHtml = '<p class="options-hint">Click an option to mark it as correct</p><div class="option-inputs">';
     for (let i = 0; i < options.length; i++) {
       const isCorrect = i === correctIndex;
       optionsHtml += `
