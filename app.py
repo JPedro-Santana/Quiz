@@ -26,6 +26,98 @@ DEFAULT_IMAGES = {
 }
 
 
+def parse_questions_payload(questions_json):
+    if not questions_json:
+        return []
+
+    try:
+        raw_questions = json.loads(questions_json)
+    except json.JSONDecodeError:
+        return []
+
+    normalized_questions = []
+    for item in raw_questions:
+        question_type = item.get("type")
+        question_text = (item.get("text") or "").strip()
+
+        if not question_text or question_type not in ("multiple", "boolean", "text"):
+            continue
+
+        if question_type in ("multiple", "boolean"):
+            options = item.get("options") or []
+            clean_options = []
+            for option in options:
+                option_text = (option or "").strip()
+                if option_text:
+                    clean_options.append(option_text)
+
+            correct_index = item.get("correct_index")
+            if len(clean_options) < 2:
+                continue
+            if not isinstance(correct_index, int):
+                continue
+            if correct_index < 0 or correct_index >= len(clean_options):
+                continue
+
+            normalized_questions.append(
+                {
+                    "type": "multiple" if question_type == "multiple" else "boolean",
+                    "text": question_text,
+                    "options": clean_options,
+                    "correct_index": correct_index,
+                }
+            )
+        else:
+            correct_answer = (item.get("correct_answer") or "").strip()
+            if not correct_answer:
+                continue
+
+            normalized_questions.append(
+                {
+                    "type": "text",
+                    "text": question_text,
+                    "correct_answer": correct_answer,
+                }
+            )
+
+    return normalized_questions
+
+
+def delete_quiz_questions(quiz_id):
+    old_questions = db.execute("SELECT id FROM questions WHERE quiz_id=?", quiz_id)
+    for question in old_questions:
+        db.execute("DELETE FROM options WHERE question_id=?", question["id"])
+        db.execute("DELETE FROM open_answers WHERE question_id=?", question["id"])
+    db.execute("DELETE FROM questions WHERE quiz_id=?", quiz_id)
+
+
+def save_quiz_questions(quiz_id, questions):
+    for question in questions:
+        question_type_db = "open" if question["type"] == "text" else "multiple"
+        db.execute(
+            "INSERT INTO questions (quiz_id, question_text, question_type) VALUES (?, ?, ?)",
+            quiz_id,
+            question["text"],
+            question_type_db,
+        )
+        question_id = db.execute("SELECT last_insert_rowid() as id")[0]["id"]
+
+        if question["type"] in ("multiple", "boolean"):
+            for index, option_text in enumerate(question["options"]):
+                db.execute(
+                    "INSERT INTO options (question_id, options_text, is_correct) VALUES (?, ?, ?)",
+                    question_id,
+                    option_text,
+                    1 if index == question["correct_index"] else 0,
+                )
+        else:
+            db.execute(
+                "INSERT INTO open_answers (question_id, correct_answer) VALUES(?, ?)",
+                question_id,
+                question["correct_answer"],
+            )
+
+
 @app.route("/")
 @app.route("/index")
 def index():
@@ -40,7 +132,7 @@ def create():
         category = request.form.get("category")
         description = (request.form.get("description") or "").strip()
         image = (request.form.get("image") or "").strip()
-        questions_json = request.form.get("questions_json")
+        questions = parse_questions_payload(request.form.get("questions_json"))
 
         if not image:
             image = DEFAULT_IMAGES.get(category)
@@ -48,14 +140,6 @@ def create():
         if not title or not category:
             flash("Title and Category are required.")
             return redirect("/create")
-
-        if questions_json:
-            try:
-                questions = json.loads(questions_json)
-            except json.JSONDecodeError:
-                questions = []
-        else:
-            questions = []
 
         if not questions:
             flash("Add at least one question")
@@ -66,48 +150,7 @@ def create():
             title, category, description, image,
         )
         quiz_id = db.execute("SELECT last_insert_rowid() as id")[0]["id"]
-
-        for q in questions:
-            original_type = q.get("type")
-            question_text = q.get("text")
-
-            if not question_text or not question_text.strip():
-                continue
-
-            question_type_db = "open" if original_type == "text" else "multiple"
-
-            db.execute(
-                "INSERT INTO questions (quiz_id, question_text, question_type) VALUES (?, ?, ?)",
-                quiz_id, question_text, question_type_db,
-            )
-            question_id = db.execute("SELECT last_insert_rowid() as id")[0]["id"]
-
-            if original_type in ("multiple", "boolean"):
-                options = q.get("options") or []
-                correct_index = q.get("correct_index")
-
-                if not options or correct_index is None:
-                    continue
-                if correct_index >= len(options):
-                    continue
-
-                for idx, option_text in enumerate(options):
-                    option_text = option_text.strip()
-                    if not option_text:
-                        continue
-                    is_correct = 1 if idx == correct_index else 0
-                    db.execute(
-                        "INSERT INTO options (question_id, options_text, is_correct) VALUES (?, ?, ?)",
-                        question_id, option_text, is_correct,
-                    )
-
-            elif original_type == "text":
-                correct_answer = q.get("correct_answer")
-                if correct_answer:
-                    db.execute(
-                        "INSERT INTO open_answers (question_id, correct_answer) VALUES(?, ?)",
-                        question_id, correct_answer,
-                    )
+        save_quiz_questions(quiz_id, questions)
 
         return redirect(url_for("quiz_layout", id=quiz_id))
 
@@ -284,10 +327,14 @@ def edit_quiz(quiz_id):
         title = (request.form.get("title") or "").strip()
         category = request.form.get("category")
         description = (request.form.get("description") or "").strip()
-        questions_json = request.form.get("questions_json")
+        new_questions = parse_questions_payload(request.form.get("questions_json"))
 
         if not title or not category:
             flash("Title and category are required.")
+            return redirect(url_for("edit_quiz", quiz_id=quiz_id))
+
+        if len(new_questions) == 0:
+            flash("Quiz must contain at least one question.")
             return redirect(url_for("edit_quiz", quiz_id=quiz_id))
 
         db.execute(
@@ -295,55 +342,8 @@ def edit_quiz(quiz_id):
             title, category, description, quiz_id,
         )
 
-        if not questions_json:
-            flash("Quiz must contain questions.")
-            return redirect(url_for("edit_quiz", quiz_id=quiz_id))
-
-        try:
-            new_questions = json.loads(questions_json)
-        except json.JSONDecodeError:
-            new_questions = []
-        if len(new_questions) == 0:
-            flash("Quiz must contain at least one question.")
-            return redirect(url_for("edit_quiz", quiz_id=quiz_id))
-
-        # Delete old questions/options
-        old_questions = db.execute("SELECT id FROM questions WHERE quiz_id=?", quiz_id)
-        for q in old_questions:
-            db.execute("DELETE FROM options WHERE question_id=?", q["id"])
-            db.execute("DELETE FROM open_answers WHERE question_id=?", q["id"])
-        db.execute("DELETE FROM questions WHERE quiz_id=?", quiz_id)
-
-        # Insert new questions
-        for q in new_questions:
-            question_text = q.get("text")
-            original_type = q.get("type")
-            if not question_text or not question_text.strip():
-                continue
-
-            question_type_db = "open" if original_type == "text" else "multiple"
-            db.execute(
-                "INSERT INTO questions (quiz_id, question_text, question_type) VALUES (?, ?, ?)",
-                quiz_id, question_text, question_type_db,
-            )
-            question_id = db.execute("SELECT last_insert_rowid() as id")[0]["id"]
-
-            if original_type in ("multiple", "boolean"):
-                options = q.get("options") or []
-                correct_index = q.get("correct_index")
-                for idx, option_text in enumerate(options):
-                    is_correct = 1 if idx == correct_index else 0
-                    db.execute(
-                        "INSERT INTO options (question_id, options_text, is_correct) VALUES (?, ?, ?)",
-                        question_id, option_text, is_correct,
-                    )
-            elif original_type == "text":
-                correct_answer = q.get("correct_answer")
-                if correct_answer:
-                    db.execute(
-                        "INSERT INTO open_answers (question_id, correct_answer) VALUES (?, ?)",
-                        question_id, correct_answer,
-                    )
+        delete_quiz_questions(quiz_id)
+        save_quiz_questions(quiz_id, new_questions)
 
         return redirect(url_for("quiz_layout", id=quiz_id))
 
@@ -358,12 +358,7 @@ def delete_quiz(quiz_id):
     if not quiz:
         abort(404)
 
-    questions = db.execute("SELECT id from questions WHERE quiz_id=?", quiz_id)
-    for q in questions:
-        db.execute("DELETE FROM options WHERE question_id=?", q["id"])
-        db.execute("DELETE FROM open_answers WHERE question_id=?", q["id"])
-
-    db.execute("DELETE FROM questions WHERE quiz_id=?", quiz_id)
+    delete_quiz_questions(quiz_id)
     db.execute("DELETE FROM quiz WHERE id=?", quiz_id)
 
     return redirect("/explore")
