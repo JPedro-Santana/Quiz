@@ -5,12 +5,11 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_quiz.css') }}">
 {% endblock %}
 
-{% block title %}Edit — {{ quiz.title }}{% endblock %}
+{% block title %}Edit {{ quiz.title }}{% endblock %}
 
 {% block content %}
 <main>
-  <h1 class="edit-page-title">Edit Quiz</h1>
-  <p class="edit-page-sub">Update your quiz info and questions below.</p>
+  <h1 class="edit-page-title">Edit {{quiz.title}}</h1>
 
   <form method="POST" id="quiz-form">
     {% with messages = get_flashed_messages() %}
@@ -49,6 +48,12 @@
     <h2>Questions</h2>
     <div id="questions-container"></div>
 
+       <!-- Hidden field that carries the serialised questions -->
+    <input type="hidden" name="questions_json" id="questions-json">
+
+    <!-- Initial questions seed for JS (Jinja → JSON) -->
+    <input type="hidden" id="initial-questions" value='{{ questions | tojson }}'>
+
     <!-- ── Add question panel ── -->
     <div class="add-question-panel">
       <h3> Add a new question</h3>
@@ -66,7 +71,6 @@
           <input type="text" id="question-text" placeholder="Type your question…">
         </div>
         <div>
-          <label style="visibility:hidden">Add</label>
           <button type="button" class="btn btn-save" id="btn-add">
             Add
           </button>
@@ -74,11 +78,7 @@
       </div>
     </div>
 
-    <!-- Hidden field that carries the serialised questions -->
-    <input type="hidden" name="questions_json" id="questions-json">
-
-    <!-- Initial questions seed for JS (Jinja → JSON) -->
-    <input type="hidden" id="initial-questions" value='{{ questions | tojson }}'>
+ 
 
     <div class="editor-actions">
       <button type="submit" class="btn btn-save">Update Quiz</button>

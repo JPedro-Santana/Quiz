@@ -1,4 +1,3 @@
-/* ---------- EXPLORE ---------- */
 .page-title {
   font-size: 40px;
   color: #1f4077;
@@ -32,6 +31,16 @@
   outline: none;
   border-color: #1e62bb;
   box-shadow: 0 0 0 3px rgba(30, 98, 187, 0.1);
+}
+
+.btn-search{
+  padding: 10px 32px;
+  background: linear-gradient(180deg, #1e62bb, #0a438d);
+}
+
+.btn-search:hover{
+  opacity: 0.9;
+  transform: scale(1.05);
 }
 
 /* List of quizzes */
@@ -78,21 +87,11 @@
 }
 
 .quiz-info p {
-    margin-top: 8px;
     font-size: 14px;
+    margin-top: 8px;
     color: #7f8c8d;
 }
 
 .quiz-action {
     margin-left: auto;
-}
-
-.btn-search{
-  padding: 10px 32px;
-  background: linear-gradient(180deg, #1e62bb, #0a438d);
-}
-
-.btn-search:hover{
-  opacity: 0.9;
-  transform: scale(1.05);
 }

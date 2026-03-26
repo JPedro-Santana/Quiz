@@ -12,12 +12,6 @@ hr{
     margin-bottom: 8px;
     padding-top: 40px;
   }
-  .edit-page-sub {
-    text-align: center;
-    color: #7a8fa8;
-    font-size: 15px;
-    margin-bottom: 0;
-  }
 
   /* Add-question mini-panel inside the edit form */
   .add-question-panel {
@@ -72,7 +66,13 @@ hr{
     width: auto;
   }
 
-  .btn-edit{
-    
-    padding: 11px;
-  }
+  .btn-edit {
+  background: #272626;
+  transition: opacity 0.2s, transform 0.15s;
+  margin-top: 24px;
+}
+
+.btn-edit:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}

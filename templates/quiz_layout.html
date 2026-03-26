@@ -76,10 +76,10 @@
         <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
           <circle cx="60" cy="60" r="52" fill="none" stroke="#e0e8f4" stroke-width="10"/>
           <circle cx="60" cy="60" r="52" fill="none"
-                  stroke="{% if result.percentage == 100 %}#f0b429{% elif result.percentage >= 60 %}#27ae60{% else %}#e53935{% endif %}"
+                  stroke="{% if result.percentage == 100 %}#27ae39{% elif result.percentage >= 50 %}#f0b429{% else %}#e53935{% endif %}"
                   stroke-width="10"
-                  stroke-dasharray="{{ (result.percentage / 100 * 326.7) | round(1) }} 326.7"
-                  stroke-dashoffset="81.7"
+                  stroke-dasharray="{{ (result.percentage / 100 * 402.9) | round(1) }} 402.9"
+                  stroke-dashoffset="35.7"
                   stroke-linecap="round"/>
         </svg>
         <div class="score-ring-label">
