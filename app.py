@@ -327,8 +327,12 @@ def edit_quiz(quiz_id):
         title = (request.form.get("title") or "").strip()
         category = request.form.get("category")
         description = (request.form.get("description") or "").strip()
+        image = (request.form.get("image") or "").strip()
         new_questions = parse_questions_payload(request.form.get("questions_json"))
 
+        if not image:
+            image = DEFAULT_IMAGES.get(category)
+            
         if not title or not category:
             flash("Title and category are required.")
             return redirect(url_for("edit_quiz", quiz_id=quiz_id))
@@ -338,8 +342,8 @@ def edit_quiz(quiz_id):
             return redirect(url_for("edit_quiz", quiz_id=quiz_id))
 
         db.execute(
-            "UPDATE quiz SET title=?, category=?, description=? WHERE id=?",
-            title, category, description, quiz_id,
+            "UPDATE quiz SET title=?, category=?, description=?, image=?, WHERE id=?",
+            title, category, description, image, quiz_id,
         )
 
         delete_quiz_questions(quiz_id)
