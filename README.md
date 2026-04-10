@@ -76,12 +76,12 @@ The frontend was built with plain HTML, CSS, and JavaScript instead of using a f
 The application also uses Ionicons for interface icons and custom category images to improve the visual experience without adding unnecessary technical overhead.
 ## Technologies Used
 
-- Python
-- Flask
-- SQLite
-- HTML
-- CSS
-- JavaScript
+- [![My Skills](https://skillicons.dev/icons?i=py)](https://skillicons.dev) Python
+- [![My Skills](https://skillicons.dev/icons?i=flask)](https://skillicons.dev) Flask
+- [![My Skills](https://skillicons.dev/icons?i=sqlite)](https://skillicons.dev) SQLite
+- [![My Skills](https://skillicons.dev/icons?i=html)](https://skillicons.dev) HTML
+- [![My Skills](https://skillicons.dev/icons?i=css)](https://skillicons.dev) CSS
+- [![My Skills](https://skillicons.dev/icons?i=js)](https://skillicons.dev) JavaScript 
 - CS50 SQL library
 - Ionicons
 
