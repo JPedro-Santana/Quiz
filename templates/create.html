@@ -1,88 +1,69 @@
-{% extends "layout.html" %} 
+{% extends "layout.html" %}
 
-{% block title %} Create Quiz {% endblock %}
+{% block title %} {{ _("Create Quiz") }} {% endblock %}
 
-{%block style %} <link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}"/> {% endblock %} 
+{%block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}" /> {% endblock %}
 
 {% block content %}
 <main>
   <div class="container">
-    <h1>Create a new Quiz</h1>
+    <h1>{{ _("Create a new Quiz") }}</h1>
   </div>
   <form method="POST" action="{{url_for('create')}}">
-     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          {% for msg in messages %}
-            <p class="msg">{{msg}}</p>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for msg in messages %}
+    <p class="msg">{{msg}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div class="form-group">
-      <label for="title">Quiz Title</label>
-      <input
-        type="text"
-        id="title"
-        name="title"
-        placeholder="Ex: History Quiz"
-        required
-      />
+      <label for="title">{{ _("Quiz Title") }}</label>
+      <input type="text" id="title" name="title" placeholder="{{ _('Ex: History Quiz') }}" required />
     </div>
     <div class="form-group">
-      <label for="category">Category</label>
+      <label for="category">{{ _("Category") }}</label>
       <select id="category" name="category" required>
-        <option value="" selected>Select Category</option>
+        <option value="" selected>{{ _("Select Category") }}</option>
         {% for category in categories %}
-        <option value="{{category}}">{{category}}</option>
+        <option value="{{category}}">{{ _(category) }}</option>
         {% endfor %}
       </select>
     </div>
     <div class="form-group">
-      <label for="description">Description</label>
-      <textarea
-        id="description"
-        name="description"
-        rows="3"
-        maxlength="148"
-      ></textarea>
+      <label for="description">{{ _("Description") }}</label>
+      <textarea id="description" name="description" rows="3" maxlength="148"></textarea>
     </div>
     <div class="form-group">
-      <label>Insert a Image URL (Optional)</label>
-      <input
-        type="text"
-        name="image"
-        placeholder="Ex: https://site.com/image.jpg"
-      />
+      <label>{{ _("Insert a Image URL (Optional)") }}</label>
+      <input type="text" name="image" placeholder="{{ _('Ex: https://site.com/image.jpg') }}" />
     </div>
 
-    <h2>Add Questions</h2>
+    <h2>{{ _("Add Questions") }}</h2>
 
     <div class="question-block">
       <div class="form-group">
-        <label>Question type</label>
+        <label>{{ _("Question type") }}</label>
         <select name="question-type" class="question-type" required>
-          <option value="multiple">Multiple Choices</option>
-          <option value="boolean">True or False</option>
-          <option value="text">Open Answer</option>
+          <option value="multiple">{{ _("Multiple Choices") }}</option>
+          <option value="boolean">{{ _("True or False") }}</option>
+          <option value="text">{{ _("Open Answer") }}</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label>Question</label>
-        <input
-          type="text"
-          name="question-text"
-          id="question-text"
-          class="question-input"
-          placeholder="Type your question..."
-        />
+        <label>{{ _("Question") }}</label>
+        <input type="text" name="question-text" id="question-text" class="question-input"
+          placeholder="{{ _('Type your question...') }}" />
       </div>
       <button type="button" class="btn btn-add" id="btn-add">
-        Add Question
+        {{ _("Add Question") }}
       </button>
     </div>
     <div id="questions-container"></div>
     <br /><br />
-    <button type="submit" class="btn btn-save">Save Quiz</button>
+    <button type="submit" class="btn btn-save">{{ _("Save Quiz") }}</button>
     <input type="hidden" name="questions_json" id="questions-json">
   </form>
 </main>

@@ -17,6 +17,7 @@ if (addQuestionBtn && questionTypeSelect && questionInput && questionsContainer)
 
 /* ---- Build a question card element ---- */
 function createQuestionElement(type, text, data = {}) {
+  const i18n = window.I18N || {};
   const questionDiv = document.createElement("div");
   questionDiv.classList.add("question-item");
   questionDiv.dataset.type = type;
@@ -33,8 +34,11 @@ function createQuestionElement(type, text, data = {}) {
   if (type === "multiple") {
     const options = data.options && data.options.length ? data.options : ["", "", "", ""];
     const correctIndex = data.correct_index !== undefined ? data.correct_index : -1;
+    const optHint = i18n.clickOptionHint || "Click an option to mark it as correct";
+    const optPrefix = i18n.optionPlaceholder || "Option";
+    const reqText = i18n.requiredSuffix || " (required)";
 
-    let optionsHtml = '<p class="options-hint">Click an option to mark it as correct</p><div class="option-inputs">';
+    let optionsHtml = `<p class="options-hint">${optHint}</p><div class="option-inputs">`;
     for (let i = 0; i < options.length; i++) {
       const isCorrect = i === correctIndex;
       optionsHtml += `
@@ -43,7 +47,7 @@ function createQuestionElement(type, text, data = {}) {
           <input
             type="text"
             class="option-text-input"
-            placeholder="Option ${i + 1}${i < 2 ? " (required)" : ""}"
+            placeholder="${optPrefix} ${i + 1}${i < 2 ? reqText : ""}"
             value="${escapeHtml(options[i] || "")}"
             ${i < 2 ? "required" : ""}
           />
@@ -65,18 +69,22 @@ function createQuestionElement(type, text, data = {}) {
 
   } else if (type === "boolean") {
     const correctIndex = data.correct_index !== undefined ? data.correct_index : -1; // 0=True, 1=False
+    const boolHint = i18n.clickBoolHint || "Click to select the correct answer";
+    const trueLabel = i18n.trueLabel || "True";
+    const falseLabel = i18n.falseLabel || "False";
+
     questionDiv.innerHTML = `
       ${header}
-      <p class="options-hint">Click to select the correct answer</p>
+      <p class="options-hint">${boolHint}</p>
       <div class="option-inputs boolean-options">
         <div class="option-btn-wrap ${correctIndex === 0 ? "is-correct" : ""}" data-index="0">
           <span class="option-letter">T</span>
-          <span class="bool-label">True</span>
+          <span class="bool-label">${trueLabel}</span>
           ${correctIndex === 0 ? '<ion-icon name="checkmark-circle" class="correct-icon"></ion-icon>' : '<ion-icon name="ellipse-outline" class="correct-icon"></ion-icon>'}
         </div>
         <div class="option-btn-wrap ${correctIndex === 1 ? "is-correct" : ""}" data-index="1">
           <span class="option-letter">F</span>
-          <span class="bool-label">False</span>
+          <span class="bool-label">${falseLabel}</span>
           ${correctIndex === 1 ? '<ion-icon name="checkmark-circle" class="correct-icon"></ion-icon>' : '<ion-icon name="ellipse-outline" class="correct-icon"></ion-icon>'}
         </div>
       </div>
@@ -88,14 +96,17 @@ function createQuestionElement(type, text, data = {}) {
     });
 
   } else if (type === "text") {
+    const correctAnsLabel = i18n.correctAnswerLabel || "Correct answer:";
+    const placeholderText = i18n.typeCorrectAnswerPlaceholder || "Type the correct answer…";
+
     questionDiv.innerHTML = `
       ${header}
       <div class="open-answer-wrap">
-        <label class="open-label">Correct answer:</label>
+        <label class="open-label">${correctAnsLabel}</label>
         <input
           type="text"
           class="open-answer-input"
-          placeholder="Type the correct answer…"
+          placeholder="${placeholderText}"
           value="${escapeHtml(data.correct_answer || "")}"
           required
         />
@@ -117,7 +128,13 @@ function selectCorrectOption(questionDiv, selectedIndex) {
 }
 
 function typeBadgeLabel(type) {
-  return { multiple: "Multiple Choice", boolean: "True / False", text: "Open Answer" }[type] || type;
+  const i18n = window.I18N || {};
+  const labels = {
+    multiple: i18n.multipleChoice || "Multiple Choice",
+    boolean: i18n.trueFalse || "True / False",
+    text: i18n.openAnswer || "Open Answer"
+  };
+  return labels[type] || type;
 }
 
 function escapeHtml(str) {
@@ -162,6 +179,8 @@ if (form && questionsContainer) {
     const hiddenInput = document.getElementById("questions-json");
     if (!hiddenInput) return; // not a quiz form
 
+    const i18n = window.I18N || {};
+    const qLabel = i18n.questionLabel || "Question";
     const questions = [];
     let validationError = false;
 
@@ -202,12 +221,12 @@ if (form && questionsContainer) {
         }
 
         if (options.length < 2) {
-          alert(`Question "${text}": please add at least 2 options.`);
+          alert(`${qLabel} "${text}": ${i18n.errAdd2Options || "please add at least 2 options."}`);
           validationError = true;
           return;
         }
         if (correctIndex === null) {
-          alert(`Question "${text}": click one option to mark it as the correct answer (green border).`);
+          alert(`${qLabel} "${text}": ${i18n.errMarkCorrectOption || "click one option to mark it as the correct answer (green border)."}`);
           validationError = true;
           return;
         }
@@ -217,7 +236,7 @@ if (form && questionsContainer) {
         const input = questionDiv.querySelector(".open-answer-input");
         const correctAnswer = input ? input.value.trim() : "";
         if (!correctAnswer) {
-          alert(`Question "${text}": please provide the correct answer.`);
+          alert(`${qLabel} "${text}": ${i18n.errProvideCorrectAnswer || "please provide the correct answer."}`);
           validationError = true;
           return;
         }
@@ -226,12 +245,14 @@ if (form && questionsContainer) {
       } else if (type === "boolean") {
         const selectedWrap = questionDiv.querySelector(".option-btn-wrap.is-correct");
         if (!selectedWrap) {
-          alert(`Question "${text}": please select True or False as the correct answer.`);
+          alert(`${qLabel} "${text}": ${i18n.errSelectTrueFalse || "please select True or False as the correct answer."}`);
           validationError = true;
           return;
         }
         const correctIndex = parseInt(selectedWrap.dataset.index);
-        questions.push({ type, text, options: ["True", "False"], correct_index: correctIndex });
+        const tVal = i18n.trueLabel || "True";
+        const fVal = i18n.falseLabel || "False";
+        questions.push({ type, text, options: [tVal, fVal], correct_index: correctIndex });
       }
     });
 
@@ -242,7 +263,7 @@ if (form && questionsContainer) {
 
     if (questions.length === 0) {
       event.preventDefault();
-      alert("Add at least one question before saving.");
+      alert(i18n.errAddAtLeastOneQuestion || "Add at least one question before saving.");
       return;
     }
 

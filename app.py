@@ -1,9 +1,14 @@
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request, url_for, abort, flash
+from flask import Flask, redirect, render_template, request, url_for, abort, flash, session
+from flask_babel import Babel, _, gettext, lazy_gettext, get_locale
 import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "my-secret-key"
+
+app.config["LANGUAGES"] = ["en", "pt_BR", "es"]
+app.config["BABEL_DEFAULT_LOCALE"] = "en"
+app.config["BABEL_TRANSLATION_DIRECTORIES"] = "translations"
 
 db = SQL("sqlite:///quiz.db")
 
@@ -16,6 +21,17 @@ CATEGORIES = [
     "Tecnology",
 ]
 
+# Ensure category names are discoverable for translation extraction
+CATEGORY_TRANSLATIONS = [
+    _("About Me"),
+    _("Entertainment"),
+    _("History"),
+    _("Science"),
+    _("Sports"),
+    _("Tecnology"),
+    _("Technology"),
+]
+
 DEFAULT_IMAGES = {
     "About Me": "/static/images/categories/aboutme.jpg",
     "Entertainment": "/static/images/categories/entertainment.jpg",
@@ -23,7 +39,51 @@ DEFAULT_IMAGES = {
     "Science": "/static/images/categories/science.jpg",
     "Sports": "/static/images/categories/sports.jpg",
     "Tecnology": "/static/images/categories/tecnology.jpg",
+    "Technology": "/static/images/categories/tecnology.jpg",
 }
+
+def select_locale():
+    lang = request.args.get("lang")
+    if lang:
+        if lang in ["pt", "pt-BR", "pt_BR"]:
+            lang = "pt_BR"
+        if lang in app.config["LANGUAGES"]:
+            session["lang"] = lang
+            return lang
+
+    if "lang" in session and session["lang"] in app.config["LANGUAGES"]:
+        return session["lang"]
+
+    best = request.accept_languages.best_match(app.config["LANGUAGES"])
+    return best if best else app.config["BABEL_DEFAULT_LOCALE"]
+
+babel = Babel(app, locale_selector=select_locale)
+
+
+@app.route("/set_language/<lang>")
+def set_language(lang):
+    if lang in ["pt", "pt-BR", "pt_BR"]:
+        lang = "pt_BR"
+    if lang in app.config["LANGUAGES"]:
+        session["lang"] = lang
+    referrer = request.referrer
+    if referrer:
+        return redirect(referrer)
+    return redirect(url_for("index"))
+
+
+@app.context_processor
+def inject_conf_vars():
+    current_lang = select_locale()
+    languages = [
+        {"code": "en", "name": "English", "flag": "🇺🇸"},
+        {"code": "pt_BR", "name": "Português (BR)", "flag": "🇧🇷"},
+        {"code": "es", "name": "Español", "flag": "🇪🇸"},
+    ]
+    return {
+        "current_locale": current_lang,
+        "languages": languages,
+    }
 
 
 def parse_questions_payload(questions_json):
@@ -138,11 +198,11 @@ def create():
             image = DEFAULT_IMAGES.get(category)
 
         if not title or not category:
-            flash("Title and Category are required.")
+            flash(_("Title and Category are required."))
             return redirect("/create")
 
         if not questions:
-            flash("Add at least one question")
+            flash(_("Add at least one question"))
             return redirect(url_for("create"))
 
         db.execute(
@@ -271,15 +331,15 @@ def quiz_layout(id):
         percentage = round((correct_count / total) * 100) if total > 0 else 0
 
         if percentage == 100:
-            message = "Perfect score! You're a genius! 🏆"
+            message = _("Perfect score! You're a genius! 🏆")
         elif percentage >= 80:
-            message = "Excellent work! Almost perfect! 🌟"
+            message = _("Excellent work! Almost perfect! 🌟")
         elif percentage >= 60:
-            message = "Well done! Solid performance! 👏"
+            message = _("Well done! Solid performance! 👏")
         elif percentage >= 40:
-            message = "Good effort! Room for improvement! 💪"
+            message = _("Good effort! Room for improvement! 💪")
         else:
-            message = "Keep practicing! You'll do better next time! 📚"
+            message = _("Keep practicing! You'll do better next time! 📚")
 
         result = {
             "correct_count": correct_count,
@@ -334,15 +394,15 @@ def edit_quiz(quiz_id):
             image = DEFAULT_IMAGES.get(category)
             
         if not title or not category:
-            flash("Title and category are required.")
+            flash(_("Title and category are required."))
             return redirect(url_for("edit_quiz", quiz_id=quiz_id))
 
         if len(new_questions) == 0:
-            flash("Quiz must contain at least one question.")
+            flash(_("Quiz must contain at least one question."))
             return redirect(url_for("edit_quiz", quiz_id=quiz_id))
 
         db.execute(
-            "UPDATE quiz SET title=?, category=?, description=?, image=?, WHERE id=?",
+            "UPDATE quiz SET title=?, category=?, description=?, image=? WHERE id=?",
             title, category, description, image, quiz_id,
         )
 

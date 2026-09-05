@@ -1,0 +1,378 @@
+# Spanish translations for QuizHub.
+# Copyright (C) 2026 QuizHub
+# This file is distributed under the same license as the QuizHub project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-05 17:22-0300\n"
+"PO-Revision-Date: 2026-09-05 17:23-0300\n"
+"Last-Translator: QuizHub Team\n"
+"Language: es\n"
+"Language-Team: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: app.py:26
+msgid "About Me"
+msgstr "Sobre Mí"
+
+#: app.py:27
+msgid "Entertainment"
+msgstr "Entretenimiento"
+
+#: app.py:28
+msgid "History"
+msgstr "Historia"
+
+#: app.py:29
+msgid "Science"
+msgstr "Ciencia"
+
+#: app.py:30
+msgid "Sports"
+msgstr "Deportes"
+
+#: app.py:31
+msgid "Tecnology"
+msgstr "Tecnología"
+
+#: app.py:32
+msgid "Technology"
+msgstr "Tecnología"
+
+#: app.py:201
+msgid "Title and Category are required."
+msgstr "El título y la categoría son obligatorios."
+
+#: app.py:205
+msgid "Add at least one question"
+msgstr "Añade al menos una pregunta."
+
+#: app.py:334
+msgid "Perfect score! You're a genius! 🏆"
+msgstr "¡Puntuación perfecta! ¡Eres un genio! 🏆"
+
+#: app.py:336
+msgid "Excellent work! Almost perfect! 🌟"
+msgstr "¡Excelente trabajo! ¡Casi perfecto! 🌟"
+
+#: app.py:338
+msgid "Well done! Solid performance! 👏"
+msgstr "¡Bien hecho! ¡Gran desempeño! 👏"
+
+#: app.py:340
+msgid "Good effort! Room for improvement! 💪"
+msgstr "¡Buen esfuerzo! ¡Hay margen de mejora! 💪"
+
+#: app.py:342
+msgid "Keep practicing! You'll do better next time! 📚"
+msgstr "¡Sigue practicando! ¡Lo harás mejor la próxima vez! 📚"
+
+#: app.py:397
+msgid "Title and category are required."
+msgstr "El título y la categoría son obligatorios."
+
+#: app.py:401
+msgid "Quiz must contain at least one question."
+msgstr "El quiz debe contener al menos una pregunta."
+
+#: templates/create.html:3 templates/index.html:8 templates/layout.html:20
+msgid "Create Quiz"
+msgstr "Crear Quiz"
+
+#: templates/create.html:11
+msgid "Create a new Quiz"
+msgstr "Crear un nuevo Quiz"
+
+#: templates/create.html:22 templates/edit_quiz.html:25
+msgid "Quiz Title"
+msgstr "Título del Quiz"
+
+#: templates/create.html:23
+msgid "Ex: History Quiz"
+msgstr "Ej: Quiz de Historia"
+
+#: templates/create.html:26 templates/edit_quiz.html:30
+msgid "Category"
+msgstr "Categoría"
+
+#: templates/create.html:28
+msgid "Select Category"
+msgstr "Seleccionar Categoría"
+
+#: templates/create.html:35 templates/edit_quiz.html:41
+msgid "Description"
+msgstr "Descripción"
+
+#: templates/create.html:39 templates/edit_quiz.html:45
+msgid "Insert a Image URL (Optional)"
+msgstr "Insertar URL de Imagen (Opcional)"
+
+#: templates/create.html:40 templates/edit_quiz.html:49
+msgid "Ex: https://site.com/image.jpg"
+msgstr "Ej: https://sitio.com/imagen.jpg"
+
+#: templates/create.html:43
+msgid "Add Questions"
+msgstr "Añadir Preguntas"
+
+#: templates/create.html:47
+msgid "Question type"
+msgstr "Tipo de pregunta"
+
+#: templates/create.html:49 templates/layout.html:54
+msgid "Multiple Choices"
+msgstr "Opción Múltiple"
+
+#: templates/create.html:50 templates/layout.html:55
+msgid "True or False"
+msgstr "Verdadero o Falso"
+
+#: templates/create.html:51 templates/edit_quiz.html:63
+#: templates/edit_quiz.html:121 templates/layout.html:56
+msgid "Open Answer"
+msgstr "Respuesta Abierta"
+
+#: templates/create.html:56 templates/layout.html:70
+msgid "Question"
+msgstr "Pregunta"
+
+#: templates/create.html:58
+msgid "Type your question..."
+msgstr "Escribe tu pregunta..."
+
+#: templates/create.html:61
+msgid "Add Question"
+msgstr "Añadir Pregunta"
+
+#: templates/create.html:66
+msgid "Save Quiz"
+msgstr "Guardar Quiz"
+
+#: templates/edit_quiz.html:8 templates/edit_quiz.html:12
+msgid "Edit"
+msgstr "Editar"
+
+#: templates/edit_quiz.html:56
+msgid "Questions"
+msgstr "Preguntas"
+
+#: templates/edit_quiz.html:65 templates/edit_quiz.html:119
+msgid "Multiple Choice"
+msgstr "Opción Múltiple"
+
+#: templates/edit_quiz.html:73 templates/layout.html:57
+msgid "Click an option to mark it as correct"
+msgstr "Haz clic en una opción para marcarla como correcta"
+
+#: templates/edit_quiz.html:81 templates/layout.html:59
+msgid "Option"
+msgstr "Opción"
+
+#: templates/edit_quiz.html:95 templates/layout.html:63
+#: templates/quiz_layout.html:149
+msgid "Correct answer:"
+msgstr "Respuesta correcta:"
+
+#: templates/edit_quiz.html:99 templates/layout.html:64
+msgid "Type the correct answer…"
+msgstr "Escribe la respuesta correcta…"
+
+#: templates/edit_quiz.html:114
+msgid "Add a new question"
+msgstr "Añadir una nueva pregunta"
+
+#: templates/edit_quiz.html:117
+msgid "Type"
+msgstr "Tipo"
+
+#: templates/edit_quiz.html:120
+msgid "True / False"
+msgstr "Verdadero / Falso"
+
+#: templates/edit_quiz.html:125
+msgid "Question text"
+msgstr "Texto de la pregunta"
+
+#: templates/edit_quiz.html:126
+msgid "Type your question…"
+msgstr "Escribe tu pregunta…"
+
+#: templates/edit_quiz.html:130
+msgid "Add"
+msgstr "Añadir"
+
+#: templates/edit_quiz.html:139
+msgid "Update Quiz"
+msgstr "Actualizar Quiz"
+
+#: templates/edit_quiz.html:141 templates/quiz_layout.html:190
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: templates/explore.html:3 templates/explore.html:9 templates/index.html:7
+#: templates/layout.html:19 templates/not_found.html:13
+#: templates/quiz_layout.html:166
+msgid "Explore Quizzes"
+msgstr "Explorar Quizzes"
+
+#: templates/explore.html:12
+msgid "Search quizzes..."
+msgstr "Buscar quizzes..."
+
+#: templates/explore.html:15
+msgid "All Categories"
+msgstr "Todas las Categorías"
+
+#: templates/explore.html:22
+msgid "Most Recent"
+msgstr "Más Recientes"
+
+#: templates/explore.html:23
+msgid "Oldest"
+msgstr "Más Antiguos"
+
+#: templates/explore.html:25
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/explore.html:39 templates/index.html:18
+msgid "Solve Quiz"
+msgstr "Resolver Quiz"
+
+#: templates/index.html:5
+msgid "Create, share and solve quizzes!"
+msgstr "¡Crea, comparte y resuelve quizzes!"
+
+#: templates/index.html:6
+msgid "Create and play quizzes on any topic."
+msgstr "Crea y juega quizzes sobre cualquier tema."
+
+#: templates/index.html:11
+msgid "Recent Quizzes"
+msgstr "Quizzes Recientes"
+
+#: templates/layout.html:23
+msgid "Change Language"
+msgstr "Cambiar Idioma"
+
+#: templates/layout.html:58
+msgid "Click to select the correct answer"
+msgstr "Haz clic para seleccionar la respuesta correcta"
+
+#: templates/layout.html:60
+msgid "(required)"
+msgstr "(obligatorio)"
+
+#: templates/layout.html:61
+msgid "True"
+msgstr "Verdadero"
+
+#: templates/layout.html:62
+msgid "False"
+msgstr "Falso"
+
+#: templates/layout.html:65
+msgid "please add at least 2 options."
+msgstr "por favor añade al menos 2 opciones."
+
+#: templates/layout.html:66
+msgid "click one option to mark it as the correct answer (green border)."
+msgstr "haz clic en una opción para marcarla como la respuesta correcta (borde verde)."
+
+#: templates/layout.html:67
+msgid "please provide the correct answer."
+msgstr "por favor proporciona la respuesta correcta."
+
+#: templates/layout.html:68
+msgid "please select True or False as the correct answer."
+msgstr "por favor selecciona Verdadero o Falso como la respuesta correcta."
+
+#: templates/layout.html:69
+msgid "Add at least one question before saving."
+msgstr "Añade al menos una pregunta antes de guardar."
+
+#: templates/not_found.html:5
+msgid "404 Not Found"
+msgstr "404 No Encontrado"
+
+#: templates/not_found.html:11
+msgid "Page Not Found"
+msgstr "Página No Encontrada"
+
+#: templates/not_found.html:12
+msgid "The page you are looking for does not exist or may have been removed."
+msgstr "La página que buscas no existe o ha sido eliminada."
+
+#: templates/quiz_layout.html:25
+msgid "question"
+msgstr "pregunta"
+
+#: templates/quiz_layout.html:25
+msgid "questions"
+msgstr "preguntas"
+
+#: templates/quiz_layout.html:56
+msgid "Type your answer…"
+msgstr "Escribe tu respuesta…"
+
+#: templates/quiz_layout.html:63
+msgid "Submit Answers"
+msgstr "Enviar Respuestas"
+
+#: templates/quiz_layout.html:92
+msgid "Quiz Complete!"
+msgstr "¡Quiz Completado!"
+
+#: templates/quiz_layout.html:97
+msgid "Correct"
+msgstr "Correctas"
+
+#: templates/quiz_layout.html:101
+msgid "Wrong"
+msgstr "Incorrectas"
+
+#: templates/quiz_layout.html:108
+msgid "Answer Review"
+msgstr "Revisión de Respuestas"
+
+#: templates/quiz_layout.html:133
+msgid "Not answered"
+msgstr "No respondida"
+
+#: templates/quiz_layout.html:139
+msgid "Your answer:"
+msgstr "Tu respuesta:"
+
+#: templates/quiz_layout.html:140
+msgid "— not answered —"
+msgstr "— no respondida —"
+
+#: templates/quiz_layout.html:163
+msgid "Try Again"
+msgstr "Intentar de Nuevo"
+
+#: templates/quiz_layout.html:175
+msgid "Edit Quiz"
+msgstr "Editar Quiz"
+
+#: templates/quiz_layout.html:179 templates/quiz_layout.html:187
+msgid "Delete Quiz"
+msgstr "Eliminar Quiz"
+
+#: templates/quiz_layout.html:188
+msgid "Are you sure you want to delete"
+msgstr "¿Estás seguro de que deseas eliminar"
+
+#: templates/quiz_layout.html:188
+msgid "This cannot be undone."
+msgstr "Esto no se puede deshacer."
+
+#: templates/quiz_layout.html:191
+msgid "Yes, Delete"
+msgstr "Sí, Eliminar"

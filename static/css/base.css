@@ -22,14 +22,20 @@ nav {
 }
 
 .logo {
-  margin-left: 80px;
+  margin-left: 40px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  margin-right: 40px;
 }
 
 nav ul {
   display: flex;
   list-style: none;
   gap: 30px;
-  margin-right: 80px;
 }
 
 nav ul li a {
@@ -53,6 +59,104 @@ nav ul li a::after {
 nav ul li a:hover::after {
   color: white;
   width: 100%;
+}
+
+/* Language Selector Dropdown */
+.lang-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 15px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.lang-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.lang-flag {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.lang-text {
+  font-weight: 500;
+}
+
+.lang-caret {
+  font-size: 11px;
+  margin-left: 2px;
+  opacity: 0.8;
+  transition: transform 0.2s ease;
+}
+
+.lang-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #ffffff;
+  min-width: 170px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 1000;
+  border: 1px solid #e2e8f0;
+  animation: fadeInDown 0.2s ease-out;
+}
+
+.lang-menu.show {
+  display: block;
+}
+
+.lang-dropdown:hover .lang-menu {
+  display: block;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lang-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: #2d3748;
+  font-size: 14px;
+  transition: background 0.15s ease;
+}
+
+.lang-item:hover {
+  background: #f0f4f8;
+  color: #1e62bb;
+}
+
+.lang-item.active {
+  background: #e9f2fd;
+  color: #1e62bb;
+  font-weight: bold;
 }
 
 /* ---------- Hero / Main ---------- */

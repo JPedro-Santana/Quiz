@@ -17,12 +17,12 @@
     </div>
     {% endif %}
     <div class="quiz-hero-info">
-      <span class="quiz-category-badge">{{ quiz.category }}</span>
+      <span class="quiz-category-badge">{{ _(quiz.category) }}</span>
       <h1>{{ quiz.title }}</h1>
       {% if quiz.description %}
       <p class="quiz-desc">{{ quiz.description }}</p>
       {% endif %}
-      <p class="quiz-meta">{{ questions | length }} question{% if questions | length != 1 %}s{% endif %}</p>
+      <p class="quiz-meta">{{ questions | length }} {{ _("question") if questions | length == 1 else _("questions") }}</p>
     </div>
   </div>
 
@@ -53,14 +53,14 @@
       <div class="open-wrap">
         <input class="open-input" type="text"
                name="q_{{ question.id }}"
-               placeholder="Type your answer…">
+               placeholder="{{ _('Type your answer…') }}">
       </div>
       {% endif %}
     </div>
     {% endfor %}
 
     <button type="submit" class="btn-submit-quiz">
-      Submit Answers
+      {{ _("Submit Answers") }}
       <ion-icon name="checkmark-done-outline"></ion-icon>
     </button>
   </form>
@@ -89,23 +89,23 @@
       </div>
 
       <div class="score-info">
-        <h2>Quiz Complete!</h2>
+        <h2>{{ _("Quiz Complete!") }}</h2>
         <p class="score-message">{{ result.message }}</p>
         <div class="score-stats">
           <div class="stat correct">
             <ion-icon name="checkmark-circle"></ion-icon>
-            <span>{{ result.correct_count }} Correct</span>
+            <span>{{ result.correct_count }} {{ _("Correct") }}</span>
           </div>
           <div class="stat wrong">
             <ion-icon name="close-circle"></ion-icon>
-            <span>{{ result.total - result.correct_count }} Wrong</span>
+            <span>{{ result.total - result.correct_count }} {{ _("Wrong") }}</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Answer review -->
-    <h2 class="review-title">Answer Review</h2>
+    <h2 class="review-title">{{ _("Answer Review") }}</h2>
 
     {% for question in questions %}
     <div class="review-card {% if question.user_correct %}correct{% else %}wrong{% endif %}">
@@ -130,14 +130,14 @@
             {% endfor %}
           </div>
           {% if question.user_answer is none %}
-            <p class="no-answer">⚠️ Not answered</p>
+            <p class="no-answer">⚠️ {{ _("Not answered") }}</p>
           {% endif %}
 
         {% else %}
           <div class="review-open">
             <div class="review-open-row {% if question.user_correct %}open-correct{% else %}open-wrong{% endif %}">
-              <strong>Your answer:</strong>
-              <span>{{ question.user_answer if question.user_answer else "— not answered —" }}</span>
+              <strong>{{ _("Your answer:") }}</strong>
+              <span>{{ question.user_answer if question.user_answer else _("— not answered —") }}</span>
               {% if question.user_correct %}
                 <ion-icon name="checkmark-circle" class="ro-icon correct-icon"></ion-icon>
               {% else %}
@@ -146,7 +146,7 @@
             </div>
             {% if not question.user_correct %}
             <div class="review-open-row open-correct">
-              <strong>Correct answer:</strong>
+              <strong>{{ _("Correct answer:") }}</strong>
               <span>{{ question.correct_answer }}</span>
               <ion-icon name="checkmark-circle" class="ro-icon correct-icon"></ion-icon>
             </div>
@@ -160,10 +160,10 @@
     <!-- Action buttons after result -->
     <div class="result-actions">
       <a class="btn-action btn-retry" href="{{ url_for('quiz_layout', id=quiz.id) }}">
-        <ion-icon name="refresh-outline"></ion-icon> Try Again
+        <ion-icon name="refresh-outline"></ion-icon> {{ _("Try Again") }}
       </a>
       <a class="btn-action btn-explore" href="{{ url_for('explore') }}">
-        <ion-icon name="compass-outline"></ion-icon> Explore Quizzes
+        <ion-icon name="compass-outline"></ion-icon> {{ _("Explore Quizzes") }}
       </a>
     </div>
   </div>
@@ -172,11 +172,11 @@
   <!-- EDIT / DELETE ACTIONS -->
   <div class="quiz-admin-actions">
     <a class="btn btn-edit" href="{{ url_for('edit_quiz', quiz_id=quiz.id) }}">
-      <ion-icon name="create-outline"></ion-icon> Edit Quiz
+      <ion-icon name="create-outline"></ion-icon> {{ _("Edit Quiz") }}
     </a>
     <form id="delete-form" action="{{ url_for('delete_quiz', quiz_id=quiz.id) }}" method="POST" style="display:inline">
       <button type="button" class="btn btn-delete" id="openDeleteModal">
-        <ion-icon name="trash-outline"></ion-icon> Delete Quiz
+        <ion-icon name="trash-outline"></ion-icon> {{ _("Delete Quiz") }}
       </button>
     </form>
   </div>
@@ -184,11 +184,11 @@
   <!-- Delete confirmation modal -->
   <div id="deleteModal" class="modal">
     <div class="modal-content">
-      <h2>Delete Quiz</h2>
-      <p>Are you sure you want to delete <strong>{{ quiz.title }}</strong>? This cannot be undone.</p>
+      <h2>{{ _("Delete Quiz") }}</h2>
+      <p>{{ _("Are you sure you want to delete") }} <strong>{{ quiz.title }}</strong>? {{ _("This cannot be undone.") }}</p>
       <div class="modal-actions">
-        <button id="cancelDelete" class="btn btn-cancel">Cancel</button>
-        <button id="confirmDelete" class="btn btn-delete">Yes, Delete</button>
+        <button id="cancelDelete" class="btn btn-cancel">{{ _("Cancel") }}</button>
+        <button id="confirmDelete" class="btn btn-delete">{{ _("Yes, Delete") }}</button>
       </div>
     </div>
   </div>
