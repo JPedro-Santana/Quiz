@@ -4,8 +4,10 @@
     <main>
         <h1>{{ _("Create, share and solve quizzes!") }}</h1>
         <p class="main-p">{{ _("Create and play quizzes on any topic.") }}</p>
-        <a href="{{url_for('explore')}}"><button class="btn-main">{{ _("Explore Quizzes") }}</button></a>
-        <a href="{{url_for('create')}}"><button class="btn-create">{{ _("Create Quiz") }}</button></a>
+        <div class="hero-actions">
+            <a href="{{url_for('explore')}}" class="btn-main">{{ _("Explore Quizzes") }}</a>
+            <a href="{{url_for('create')}}" class="btn-create">{{ _("Create Quiz") }}</a>
+        </div>
     </main>
     <section>
         <h2>{{ _("Recent Quizzes") }}</h2>

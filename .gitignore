@@ -1,3 +1,7 @@
 __pycache__/
 .vscode/
 *.pyc
+.venv/
+test-results/
+babel.cfg
+messages.pot
